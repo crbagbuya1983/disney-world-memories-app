@@ -1,0 +1,45 @@
+/* src/App.css 1 */
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+} */
+
+/* src/App.css 2*/
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center; /* Centers the Nav horizontally */
+  align-items: center; /* Aligns the Nav vertically (optional) */
+  /* height: 100vh; Optional: sets the height of the container to full view height */
+}
+
+header, footer {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+header h1, footer p {
+  margin: 0;
+}
+
+
+
