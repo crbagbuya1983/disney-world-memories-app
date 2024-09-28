@@ -15,9 +15,9 @@ function App() {
           <Header />
           <main>
             <Nav className="nav-container">
-              <Nav.Item><Nav.Link><Link to="/">Upload Photo</Link></Nav.Link></Nav.Item>
-              <Nav.Item><Nav.Link><Link to="/view-list">View Gallery</Link></Nav.Link></Nav.Item>
-              <Nav.Item><Nav.Link><Link to="/view-favorites">My favorites</Link></Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link as={Link} to="/">Upload Photo</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link as={Link} to="/view-list">View Gallery</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link as={Link} to="/view-favorites">My favorites</Nav.Link></Nav.Item>
             </Nav>
             <Routes>
               <Route path="/view-list" element={<MemoryList />} />
