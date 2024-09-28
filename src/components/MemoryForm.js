@@ -35,7 +35,7 @@ const MemoryForm = () => {
       setTitle('');
       setDescription('');
       setPhoto(null);
-      setIsFavorite(false);
+      setIsFavorite(isfavorite);
     } catch (error) {
       console.error('Error adding memory:', error);
     }
