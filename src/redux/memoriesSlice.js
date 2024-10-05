@@ -1,16 +1,17 @@
 // 9/12/2024 update:
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import {API_BASE_URL, FETCH_MEMORY_ACTION, ADD_MEMORY_ACTION, UPDATE_MEMORY_ACTION, DELETE_MEMORY_ACTION, TOGGLE_FAVORITE_ACTION} from '../config';
 
 // Async Thunks
-export const fetchMemories = createAsyncThunk('memories/fetchMemories', async () => {
-  const response = await axios.get('http://localhost:5000/api/memories');
+export const fetchMemories = createAsyncThunk(FETCH_MEMORY_ACTION, async () => {
+  const response = await axios.get(API_BASE_URL);
   return response.data;
 });
 
-export const addMemory = createAsyncThunk('memories/addMemory', async (memoryData) => {
+export const addMemory = createAsyncThunk(ADD_MEMORY_ACTION, async (memoryData) => {
  
-  const response = await axios.post('http://localhost:5000/api/memories', memoryData, {
+  const response = await axios.post(API_BASE_URL, memoryData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -18,19 +19,19 @@ export const addMemory = createAsyncThunk('memories/addMemory', async (memoryDat
   return response.data;
 });
 
-export const editMemory = createAsyncThunk('memories/updateMemory', async (memory) => {
-  const response = await axios.put(`http://localhost:5000/api/memories/${memory._id}`, memory);
+export const editMemory = createAsyncThunk(UPDATE_MEMORY_ACTION, async (memory) => {
+  const response = await axios.put(`${API_BASE_URL}/${memory._id}`, memory);
   return response.data;
 });
 
-export const deleteMemory = createAsyncThunk('memories/deleteMemory', async (_id) => {
-  await axios.delete(`http://localhost:5000/api/memories/${_id}`);
+export const deleteMemory = createAsyncThunk(DELETE_MEMORY_ACTION, async (_id) => {
+  await axios.delete(`${API_BASE_URL}/${_id}`);
   return _id;
 });
 
 // Async thunk to sync the toggle favorite status with the database
 export const toggleFavoriteInDb = createAsyncThunk(
-  'memories/toggleFavoriteInDb',
+  TOGGLE_FAVORITE_ACTION,
   async (memoryId, { getState, rejectWithValue }) => {
     const state = getState();
     const memory = state.memories.memories.find(mem => mem._id === memoryId);
@@ -38,7 +39,7 @@ export const toggleFavoriteInDb = createAsyncThunk(
     // Toggle the current value of isfavorite
     try {
       // Send the updated isfavorite status to the backend
-      const response = await axios.put(`http://localhost:5000/api/memories/${memoryId}`, {
+      const response = await axios.put(`${API_BASE_URL}/${memoryId}`, {
         isfavorite: memory.isfavorite,
       });
 
