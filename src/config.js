@@ -1,6 +1,6 @@
 // src/config.js
 // const API_BASE_URL = 'http://localhost:5000/api/memories';
-const API_BASE_URL = 'https://your-heroku-app.herokuapp.com/api/memories';
+const API_BASE_URL = 'https://disney-express-backend-360388aa6246.herokuapp.com/api/memories';
 const FETCH_MEMORY_ACTION = 'memories/fetchMemories';
 const ADD_MEMORY_ACTION = 'memories/addMemory';
 const UPDATE_MEMORY_ACTION = 'memories/updateMemory';
