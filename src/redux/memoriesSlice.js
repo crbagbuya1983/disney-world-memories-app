@@ -2,6 +2,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import {API_BASE_URL, FETCH_MEMORY_ACTION, ADD_MEMORY_ACTION, UPDATE_MEMORY_ACTION, DELETE_MEMORY_ACTION, TOGGLE_FAVORITE_ACTION} from '../config';
+// configure Axios to allow credentials explicitly:
+axios.defaults.withCredentials = true;
+// checking API_BASE_URL 
+console.log(API_BASE_URL);
+
 
 // Async Thunks
 export const fetchMemories = createAsyncThunk(FETCH_MEMORY_ACTION, async () => {
