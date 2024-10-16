@@ -4,7 +4,7 @@ import { useSelector, } from 'react-redux';
 import { Grid, Card, CardContent, Typography, Pagination } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MemoryItem from './MemoryItem';
-// import { toggleFavorite } from '../redux/memoriesSlice';
+import { fetchMemories } from '../redux/memoriesSlice';
 
 const Favorites = () => {
   const dispatch = useDispatch();
