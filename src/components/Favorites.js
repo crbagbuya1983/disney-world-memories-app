@@ -7,11 +7,21 @@ import MemoryItem from './MemoryItem';
 // import { toggleFavorite } from '../redux/memoriesSlice';
 
 const Favorites = () => {
+  const dispatch = useDispatch();
   // const dispatch = useDispatch();
   const memories = useSelector((state) => state.memories.memories);
+  const [favoriteMemories, setFavoriteMemories] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchMemories());
+  }, [dispatch]);
   
   // Filter memories to get only those marked as favorite
-  const favoriteMemories = memories.filter((memory) => memory.isfavorite);
+  // const favoriteMemories = memories.filter((memory) => memory.isfavorite);
+  useEffect(() => {
+    const favorites = memories.filter((memory) => memory.isfavorite);
+    setFavoriteMemories(favorites);
+  }, [memories]);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
