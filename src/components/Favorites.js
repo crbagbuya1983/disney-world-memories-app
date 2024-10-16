@@ -1,6 +1,6 @@
 // Update 09/27/24
-import React, { useState, } from 'react';
-import { useSelector, } from 'react-redux';
+import React, { useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Card, CardContent, Typography, Pagination } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MemoryItem from './MemoryItem';
