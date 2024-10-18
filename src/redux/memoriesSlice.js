@@ -10,7 +10,9 @@ console.log(API_BASE_URL);
 
 // Async Thunks
 export const fetchMemories = createAsyncThunk(FETCH_MEMORY_ACTION, async () => {
-  const response = await axios.get(API_BASE_URL);
+  const response = await axios.get(API_BASE_URL, {
+    withCredentials: true,
+    });
   return response.data;
 });
 
@@ -20,17 +22,22 @@ export const addMemory = createAsyncThunk(ADD_MEMORY_ACTION, async (memoryData) 
     headers: {
       'Content-Type': 'multipart/form-data',
     },
+    withCredentials: true, // Include credentials
   });
   return response.data;
 });
 
 export const editMemory = createAsyncThunk(UPDATE_MEMORY_ACTION, async (memory) => {
-  const response = await axios.put(`${API_BASE_URL}/${memory._id}`, memory);
+  const response = await axios.put(`${API_BASE_URL}/${memory._id}`, memory, {
+    withCredentials: true,
+  });
   return response.data;
 });
 
 export const deleteMemory = createAsyncThunk(DELETE_MEMORY_ACTION, async (_id) => {
-  await axios.delete(`${API_BASE_URL}/${_id}`);
+  await axios.delete(`${API_BASE_URL}/${_id}`, {
+    withCredentials: true, // Include credentials
+  });
   return _id;
 });
 
