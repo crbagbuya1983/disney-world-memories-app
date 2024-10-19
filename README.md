@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+Disney World Memories App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  This is a simple photo memories app where users can upload photos, add descriptions, and mark them as favorites. The app allows users to view, edit, and delete memories, with the additional ability to filter and paginate through their favorite memories.
 
-## Available Scripts
+**Features**
 
-In the project directory, you can run:
+    **Add Memories:** Upload a photo with a title and description.
+  
+    **Mark as Favorite:** Toggle a memory as favorite and view all favorites in a dedicated section.
+    
+    **Edit Memories**: Modify the title and description of any memory.
+  
+    **Delete Memories**: Remove memories from the gallery.
+    
+    **Search:** Search for memories by title.
+    
+    **Pagination:** Memories and favorites are displayed with pagination, showing 6 memories per page.
 
-### `npm start`
+**Tech Stack**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    **Frontend:** React, Redux Toolkit, Material-UI, Axios
+    
+    **Backend:** Express.js, MongoDB Atlas, AWS S3 for photo storage
+    
+    **Deployment:** Frontend on Vercel, Backend on Heroku
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Components Overview**
 
-### `npm test`
+**Favorites.js**
+    Displays all memories marked as favorite with pagination. Users can toggle the favorite status and view details like title and description.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**MemoryForm.js**
+    Allows users to upload a photo and add details (title and description) to create a new memory. The form handles image uploads and data submission via Redux actions.
 
-### `npm run build`
+**MemoryItem.js**
+    A component that renders individual memory items, including the image, title, description, and action buttons (edit, delete, toggle favorite).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**MemoryList.js**
+    Displays a gallery of all memories, supports search functionality to filter by title, and allows pagination through the memory list. Users can edit or delete memories and toggle the favorite status.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Setup and Installation**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+     ** Clone the repository:**
+      
+        git clone https://github.com/your-username/disney-world-memories-app.git
+      
+      **Install dependencies:**
+      
+        cd disney-world-memories-app
+        npm install
+      
+      **Start the frontend development server**:
+      
+        npm start
+      
+      **Ensure the backend server is running. You can start the backend server from its folder:**
+      
+        cd ../photo-backend
+      
+        npm install
+        
+        npm start
 
-### `npm run eject`
+**API Endpoints**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Make sure to connect the frontend with the backend's API endpoints. The backend API URL is defined in config.js:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+GET /api/memories: Fetch all memories
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+POST /api/memories: Add a new memory
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+PUT /api/memories/: Edit a memory
 
-## Learn More
+DELETE /api/memories/: Delete a memory
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+PUT /api/memories/
+/favorite: Toggle favorite status
