@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';  // Import from 'react-dom/client' in React 18
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import './index.css';
+// import './index.css';
+import './App.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
