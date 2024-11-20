@@ -1,0 +1,29 @@
+.logo {
+    height: 50px; /* Adjust the logo size as needed */
+    width: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  /* .header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Space out logo and title */
+    /* padding: 10px;
+    position: relative;
+  } */ */
+
+  .header-title {
+    font-size: 24px;
+    margin: 0;
+    position: center;
+  }
+
+  .logo-link {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 0; /* Align the logo to the leftmost part */
+    transform: translateY(-50%); /* Adjust for perfect vertical centering */
+    padding-left: 10px; /* Add some padding to separate it from the edge if needed */
+  }

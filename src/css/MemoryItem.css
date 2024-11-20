@@ -1,0 +1,32 @@
+/* MemoryItem.css */
+.memory-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .memory-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px);
+  }
+
+ /* Full-Screen Zoomed Image Container */
+.zoomed-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px; /* Padding for better spacing around the image */
+}
+
+.zoomed-image {
+    max-width: 120vw; /* Allow the image to take up most of the viewport width */
+    max-height: 95vh; /* Allow the image to take up most of the viewport height */
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Increased shadow for emphasis */
+    transition: transform 0.3s ease; /* Smooth scale transition */
+    transform: scale(2.5); /* Scale the image slightly larger */
+}
+
