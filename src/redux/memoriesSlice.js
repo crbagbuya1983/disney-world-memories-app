@@ -76,8 +76,12 @@ const memoriesSlice = createSlice({
       const memory = state.memories.find(mem => mem._id === action.payload);
       if (memory) {
         memory.isfavorite = !memory.isfavorite;
-      }
-      
+
+        // if (memory.isfavorite) {
+        //   state.memories.splice(memoryIndex, 1); // Remove it from current position
+        //   state.memories.unshift(memory); // Add it to the beginning
+        // }
+      }  
     },
   },
   extraReducers: (builder) => {
@@ -87,7 +91,7 @@ const memoriesSlice = createSlice({
       })
       .addCase(fetchMemories.fulfilled, (state, action) => {
         state.loading = false;
-        state.memories = action.payload;
+        state.memories = action.payload.reverse();
       })
       .addCase(fetchMemories.rejected, (state, action) => {
         state.loading = false;
