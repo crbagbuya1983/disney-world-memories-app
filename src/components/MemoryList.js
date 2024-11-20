@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMemories, deleteMemory, editMemory, toggleFavoriteInDb, toggleFavorite } from '../redux/memoriesSlice';
-import { Grid, Card, CardContent, IconButton, Typography, TextField } from '@mui/material';
+import { Grid, Card, CardContent, IconButton, Typography, TextField,Dialog, DialogActions, DialogContent, DialogTitle, Button, } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import MemoryItem from './MemoryItem';
 import Pagination from '@mui/material/Pagination';
+import '../css/MemoryList.css';
 
 const MemoryList = () => {
   const dispatch = useDispatch();
@@ -16,12 +17,14 @@ const MemoryList = () => {
   const [editIndex, setEditIndex] = useState(null);
   const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
-
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredMemories, setFilteredMemories] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+
+  // Modal states
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [memoryToDelete, setMemoryToDelete] = useState(null);
 
   useEffect(() => {
     dispatch(fetchMemories());
@@ -59,6 +62,24 @@ const MemoryList = () => {
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
+  };
+
+  // Modal handlers
+  const openModal = (memory) => {
+    setMemoryToDelete(memory);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setMemoryToDelete(null);
+  };
+
+  const confirmDelete = () => {
+    if (memoryToDelete) {
+      dispatch(deleteMemory(memoryToDelete._id));
+      closeModal();
+    }
   };
 
   // Pagination logic
@@ -103,12 +124,15 @@ const MemoryList = () => {
                     <MemoryItem memory={memory} />
                     {editIndex === memory._id ? (
                       <>
+                      <br/>
                         <TextField
                           label="Title"
                           variant="outlined"
                           value={editTitle}
                           onChange={(e) => setEditTitle(e.target.value)}
                         />
+                        <br/>
+                        <br/>
                         <TextField
                           label="Description"
                           multiline
@@ -127,10 +151,13 @@ const MemoryList = () => {
                         <IconButton onClick={() => handleEditMemory(memory)}>
                           <EditIcon color="warning" />
                         </IconButton>
-                        <IconButton onClick={() => handleToggleFavorite(memory)}>
+                        <IconButton className="favorite-icon" onClick={() => handleToggleFavorite(memory)}>
                           <FavoriteIcon color={memory.isfavorite ? 'primary' : 'disabled'} />
                         </IconButton>
-                        <IconButton onClick={() => dispatch(deleteMemory(memory._id))}>
+                        {/* <IconButton onClick={() => dispatch(deleteMemory(memory._id))}>
+                          <DeleteIcon color="error" />
+                        </IconButton> */}
+                        <IconButton onClick={() => openModal(memory)}>
                           <DeleteIcon color="error" />
                         </IconButton>
                       </>
@@ -147,6 +174,28 @@ const MemoryList = () => {
             color="primary"
             style={{ marginTop: '20px' }}
           />
+          {/* Modal */}
+          <Dialog open={isModalOpen} onClose={closeModal}>
+            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogContent>
+              {memoryToDelete && (
+                <>
+                  <Typography>
+                    Are you sure you want to delete this photo?
+                  </Typography>
+                  <MemoryItem memory={memoryToDelete} />
+                </>
+              )}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={closeModal} color="primary">
+                No
+              </Button>
+              <Button onClick={confirmDelete} color="error">
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
         </>
       )}
     </div>

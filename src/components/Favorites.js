@@ -8,7 +8,6 @@ import { fetchMemories } from '../redux/memoriesSlice';
 
 const Favorites = () => {
   const dispatch = useDispatch();
-  // const dispatch = useDispatch();
   const memories = useSelector((state) => state.memories.memories);
   const [favoriteMemories, setFavoriteMemories] = useState([]);
 
@@ -22,6 +21,8 @@ const Favorites = () => {
     const favorites = memories.filter((memory) => memory.isfavorite);
     setFavoriteMemories(favorites);
   }, [memories]);
+
+  
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
