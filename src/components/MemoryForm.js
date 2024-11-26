@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField, Button, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; // Import for navigation
 import { addMemory } from '../redux/memoriesSlice';
 import '../css/MemoryForm.css';
 
@@ -11,9 +12,14 @@ const MemoryForm = () => {
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null); // State for preview
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // updated 11/26/2024
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   const dispatch = useDispatch();
+  // updated 11/26/2024
+  const navigate = useNavigate();
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -39,14 +45,29 @@ const MemoryForm = () => {
     setDescription('');
     setPhoto(null);
     setPhotoPreview(null);
-    setIsModalOpen(false); // Close modal on successful submission
+    // setIsModalOpen(false); // Close modal on successful submission
+    // updated 11/26/2024
+    setIsUploadModalOpen(false);
+    setIsSuccessModalOpen(true); // Open success modal
   };
 
   // Handle closing modal and reset preview
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setPhoto(null); // Reset photo
-    setPhotoPreview(null); // Reset preview
+  // const handleModalClose = () => {
+  //   setIsModalOpen(false);
+  //   setPhoto(null); // Reset photo
+  //   setPhotoPreview(null); // Reset preview
+  // };
+  
+  // updated 11/26/2024
+  const handleSuccessModalClose = () => {
+    setIsSuccessModalOpen(false);
+    navigate('/view-list'); // Navigate to the photo gallery
+  };
+
+  const handleUploadModalClose = () => {
+    setIsUploadModalOpen(false);
+    setPhoto(null);
+    setPhotoPreview(null);
   };
 
   return (
@@ -73,7 +94,8 @@ const MemoryForm = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <Button onClick={() => setIsModalOpen(true)} variant="contained">
+        {/* <Button onClick={() => setIsModalOpen(true)} variant="contained"> */}
+        <Button onClick={() => setIsUploadModalOpen(true)} variant="contained">
           Upload Photo
         </Button>
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} className="pulsate">
@@ -82,8 +104,8 @@ const MemoryForm = () => {
       </Box>
 
       {/* Custom Modal */}
-      {isModalOpen && (
-        <div className="custom-modal-overlay" onClick={handleModalClose}>
+      {isUploadModalOpen  && (
+        <div className="custom-modal-overlay" onClick={handleUploadModalClose}>
           <div className="custom-modal" onClick={(e) => e.stopPropagation()}>
             <h3>Upload Photo</h3>
             <input
@@ -93,8 +115,21 @@ const MemoryForm = () => {
             {photoPreview && (
               <img src={photoPreview} alt="preview" className="photo-preview" />
             )}
-            <Button onClick={() => setIsModalOpen(false)} disabled={!photo}>Done</Button>
-            <Button onClick={handleModalClose}>Cancel</Button>
+            <Button onClick={() => setIsUploadModalOpen(false)} disabled={!photo}>Done</Button>
+            <Button onClick={handleUploadModalClose}>Cancel</Button>
+          </div>
+        </div>
+      )}
+
+      {/* Success Modal */}
+      {isSuccessModalOpen && (
+        <div className="custom-modal-overlay" onClick={handleSuccessModalClose}>
+          <div className="custom-modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Photo Added!</h3>
+            <p>Your photo has been successfully added to your memory.</p>
+            <Button variant="contained" onClick={handleSuccessModalClose}>
+              OK
+            </Button>
           </div>
         </div>
       )}
