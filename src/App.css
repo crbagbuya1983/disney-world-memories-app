@@ -15,9 +15,12 @@
 /* Body styles */
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #fff;
+  /* background-color: #fff; */
+  /* background-color: red !important; */
   color: #333;
 }
+
+
 
 /* Header styles */
 header {
@@ -55,12 +58,16 @@ header {
 }
 
 /* Main content styles */
+/* Additional transparency on the main content */
 main {
   flex: 1;
   padding: 20px;
-  background-color: #f0f0f0;
-  margin-top: 60px; /* Adjust this value based on header height */
-  margin-bottom: 60px; /* Adjust this value based on footer height */
+  background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+  /* background-color: red !important; */
+  margin-top: 60px;
+  margin-bottom: 60px;
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow effect */
 }
 
 /* Footer styles */
