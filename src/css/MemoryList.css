@@ -26,3 +26,7 @@
     background: #02386E;
     transform: translateY(2px);
   }
+
+  .transparentBackground {
+    background-color: transparent;
+  }

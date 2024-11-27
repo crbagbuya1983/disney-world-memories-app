@@ -4,6 +4,7 @@
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     border-radius: 8px;
     overflow: hidden;
+    background-color: transparent;
   }
   
   .memory-card:hover {
