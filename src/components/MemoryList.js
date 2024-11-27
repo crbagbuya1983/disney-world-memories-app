@@ -119,8 +119,8 @@ const MemoryList = () => {
           <Grid container spacing={3}>
             {currentMemories.map((memory) => (
               <Grid item xs={12} sm={6} md={4} key={memory._id}>
-                <Card>
-                  <CardContent>
+                <Card sx={{backgroundColor: 'transparent', boxShadow: 10,}}>
+                  <CardContent >
                     <MemoryItem memory={memory} />
                     {editIndex === memory._id ? (
                       <>

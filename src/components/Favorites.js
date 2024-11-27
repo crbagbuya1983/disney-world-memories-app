@@ -60,7 +60,7 @@ const Favorites = () => {
           <Grid container spacing={3}>
             {currentPhotos.map((memory) => (
               <Grid item xs={12} sm={6} md={4} key={memory._id}>
-                <Card>
+                <Card sx={{backgroundColor: 'transparent', boxShadow: 10}}>
                   <CardContent>
                     <MemoryItem memory={memory} />
                     <Typography variant="h5">{memory.title}</Typography>
